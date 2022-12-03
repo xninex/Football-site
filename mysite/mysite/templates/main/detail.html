@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}{{ new.title }}{% endblock title %}
+
+{% block content %}
+  <h2>{{ new.title }}</h2><br>
+  <p>{{ new.content }}</p><br>
+  <em>{{ new.pub_date }}</em><br>
+
+{% if latest_comment_list %}
+  {% for c in latest_comment_list %}
+  <p>{{ c.name }}</p><br>
+  <p>{{ c.text }}</p><br>
+  <em>{{ c.pub_date }}</em><br>
+  {% endfor %}
+  {% else %}
+  Комментарии не найдены, станьте первым
+{% endif %}
+
+<div class="mb-3">
+  <form action="{% url 'main:leave_comment' new.id %}" method="post">
+    {% csrf_token %}
+  <input type="text" placeholder="Ваше имя" name="name">
+</div>
+<div class="mb-3">
+  <textarea name="text" placeholder="Текст комментария" cols="50" rows="5"></textarea>
+</div>
+<button type="submit">Оставить комментарий</button>
+{% endblock %}

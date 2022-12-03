@@ -3,4 +3,5 @@ from .models import *
 
 
 admin.site.register(LatestNewsModel)
+admin.site.register(Comment)
 
